@@ -1371,6 +1371,11 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.4.tgz#38fd73ddfd9b55abb1e1b2ed578cb55bd7b7d339"
   integrity sha512-8+KAKzEvSUdeo+kmqnKrqgeE+LcA0tjYWFY7RPProVYwnqDjukzO+3b6dLD56rYX5TdWejnEOLJYOIeh4CXKuA==
 
+"@types/lodash@^4.14.149":
+  version "4.14.149"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.149.tgz#1342d63d948c6062838fbf961012f74d4e638440"
+  integrity sha512-ijGqzZt/b7BfzcK9vTrS6MFljQRPn5BFWOx8oE0GYxribu6uV+aA9zZuXI1zc/etK9E8nrgdoF2+LgUw7+9tJQ==
+
 "@types/minimatch@*":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
@@ -1395,6 +1400,11 @@
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
   integrity sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==
+
+"@types/prismjs@*":
+  version "1.16.0"
+  resolved "https://registry.yarnpkg.com/@types/prismjs/-/prismjs-1.16.0.tgz#4328c9f65698e59f4feade8f4e5d928c748fd643"
+  integrity sha512-mEyuziLrfDCQ4juQP1k706BUU/c8OGn/ZFl69AXXY6dStHClKX4P+N8+rhqpul1vRDA2VOygzMRSJJZHyDEOfw==
 
 "@types/prop-types@*":
   version "15.7.3"
@@ -1427,6 +1437,13 @@
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
+
+"@types/refractor@^2.8.0":
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/@types/refractor/-/refractor-2.8.0.tgz#2e17b69f27e89c1ea076f49b599abe3567c54e01"
+  integrity sha512-l3wSB96RFZnvB8bnbF8UmYsDD1MQl+u7jtYq+DgI/vo3RD5pdbK3OitGEvMO3DNJhTYmCEhXLVWyyWTddzwNzQ==
+  dependencies:
+    "@types/prismjs" "*"
 
 "@types/resolve@0.0.8":
   version "0.0.8"
@@ -9918,6 +9935,11 @@ print-tree@^0.1.5:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/print-tree/-/print-tree-0.1.5.tgz#32c9ea0fac5da68616fe042049b540a4c4b774ee"
   integrity sha512-t5eFtuheMgWGR3kj1vtxsvfWrrecEEWow3IgEtbW0EPbYRufHAvB+ShK1DgRjWxEYYEqO4B6DNlkoPmh7E3LGQ==
+
+prism-color-variables@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/prism-color-variables/-/prism-color-variables-1.0.0.tgz#dc1d90f92d17344234d690ad07221a910440142d"
+  integrity sha512-Es0qDTa/hSSKxAY01fELSJQ8tmhDaO2m7rp9Je4k97Uaco77rrdfxBx0nECOS5H37JBY5Voohaes+5BGU9q6Og==
 
 prismjs@~1.17.0:
   version "1.17.1"
