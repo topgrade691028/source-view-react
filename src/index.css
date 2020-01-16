@@ -1,0 +1,50 @@
+:root {
+    --source-background-color: initial;
+    --source-text-color: initial;
+    --source-font-family: Consolas, Courier, monospace;
+    --source-selection-background-color: #b3d7ff;
+    --source-gutter-background-color: #d6fedb;
+    --source-code-background-color: #eaffee;
+}
+
+.source {
+    background-color: var(--source-background-color);
+    color: var(--source-text-color);
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.source::selection {
+    background-color: var(--source-selection-background-color);
+}
+
+.source td {
+    vertical-align: top;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.source-line {
+    line-height: 1.5;
+    font-family: var(--source-font-family);
+}
+
+.source-gutter {
+    width: 7ch;
+    padding: 0 1ch;
+    text-align: right;
+    cursor: pointer;
+    user-select: none;
+}
+
+.source-gutter::before {
+    content: attr(data-line-number);
+}
+
+.source-code {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-all;
+    padding: 0 0 0 .5em;
+}
