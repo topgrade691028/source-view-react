@@ -7,7 +7,7 @@ import {highlight} from 'refractor';
 import {tokenize, pickRanges, SourceRange} from 'source-tokenizer';
 import 'prism-color-variables/variables.css';
 import 'prism-color-variables/themes/visual-studio.css';
-import {SourceView, RenderSyntaxTree} from '../../src';
+import {Source, RenderSyntaxTree} from '../../src';
 import '../../src/index.css';
 import './index.less';
 
@@ -64,7 +64,7 @@ const App: FC = () => {
             <div style={{marginBottom: 20}}>
                 <Input value={keyword} onChange={e => setKeyword(e.target.value)} />
             </div>
-            {source && <SourceView source={source} syntax={syntax} renderSyntaxTree={renderTree} />}
+            {source && <Source source={source} syntax={syntax} renderSyntaxTree={renderTree} />}
         </div>
     );
 };

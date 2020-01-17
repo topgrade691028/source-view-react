@@ -2,14 +2,14 @@
 import {render} from '@testing-library/react';
 import {highlight} from 'refractor';
 import {tokenize} from 'source-tokenizer';
-import {SourceView} from '../SourceView';
+import {Source} from '../Source';
 
 const source = `const a = 3;
 console.log(3);`;
 
-describe('SourceView', () => {
+describe('Source', () => {
     test('text source', () => {
-        const {asFragment} = render(<SourceView source={source} />);
+        const {asFragment} = render(<Source source={source} />);
         expect(asFragment()).toMatchSnapshot();
     });
 
@@ -20,7 +20,7 @@ describe('SourceView', () => {
             },
         };
         const syntax = tokenize(source, options);
-        const {asFragment} = render(<SourceView source={source} syntax={syntax} />);
+        const {asFragment} = render(<Source source={source} syntax={syntax} />);
         expect(asFragment()).toMatchSnapshot();
     });
 
@@ -38,7 +38,7 @@ describe('SourceView', () => {
 
             return node.children.map(stripSyntax);
         };
-        const {asFragment} = render(<SourceView syntax={syntax} renderSyntaxTree={stripSyntax} />);
+        const {asFragment} = render(<Source syntax={syntax} renderSyntaxTree={stripSyntax} />);
         expect(asFragment()).toMatchSnapshot();
     });
 });

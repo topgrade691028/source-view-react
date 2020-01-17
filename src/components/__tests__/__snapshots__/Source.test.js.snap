@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SourceView custom syntax renderer 1`] = `
+exports[`Source custom syntax renderer 1`] = `
 <DocumentFragment>
   <table
     class="source"
@@ -37,7 +37,7 @@ exports[`SourceView custom syntax renderer 1`] = `
 </DocumentFragment>
 `;
 
-exports[`SourceView syntax source 1`] = `
+exports[`Source syntax source 1`] = `
 <DocumentFragment>
   <table
     class="source"
@@ -129,7 +129,7 @@ exports[`SourceView syntax source 1`] = `
 </DocumentFragment>
 `;
 
-exports[`SourceView text source 1`] = `
+exports[`Source text source 1`] = `
 <DocumentFragment>
   <table
     class="source"

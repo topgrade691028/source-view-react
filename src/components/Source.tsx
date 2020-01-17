@@ -5,7 +5,7 @@ export type RenderSyntaxTree = (root: TreeNode, defaultRender: RenderSyntaxEleme
 
 export type RenderSyntaxElement = (element: SyntaxElement, i: number) => ReactNode;
 
-interface SourceViewProps {
+interface SourceProps {
     source?: string;
     syntax?: LineOfSyntax[];
     renderSyntaxTree?: RenderSyntaxTree;
@@ -27,7 +27,7 @@ const renderGutter = (line: number): ReactNode => <td className="source-gutter" 
 
 const renderSourceContent = (source: string): ReactNode => <td className="source-code">{source}</td>;
 
-const renderSyntaxContent = (syntax: LineOfSyntax, {renderSyntaxTree}: SourceViewProps): ReactNode => {
+const renderSyntaxContent = (syntax: LineOfSyntax, {renderSyntaxTree}: SourceProps): ReactNode => {
     const render = (element: SyntaxElement, i: number) => {
         if (typeof element === 'string') {
             return element;
@@ -50,14 +50,14 @@ const renderSourceLine = (content: string, i: number): ReactNode => (
     </tr>
 );
 
-const renderSyntaxLine = (content: LineOfSyntax, i: number, props: SourceViewProps): ReactNode => (
+const renderSyntaxLine = (content: LineOfSyntax, i: number, props: SourceProps): ReactNode => (
     <tr key={i} className="source-line">
         {renderGutter(i + 1)}
         {renderSyntaxContent(content, props)}
     </tr>
 );
 
-export const SourceView: FC<SourceViewProps> = props => {
+export const Source: FC<SourceProps> = props => {
     const {source, syntax} = props;
     const lines = useMemo(() => source?.split('\n') ?? [], [source]);
 

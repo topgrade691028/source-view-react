@@ -1,1 +1,1 @@
-export * from './components/SourceView';
+export * from './components/Source';
