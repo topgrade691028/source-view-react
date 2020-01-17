@@ -5,16 +5,11 @@ export type RenderSyntaxTree = (root: TreeNode, defaultRender: RenderSyntaxEleme
 
 export type RenderSyntaxElement = (element: SyntaxElement, i: number) => ReactNode;
 
-interface TextViewProps {
-    source: string;
-}
-
-interface SyntaxViewProps {
-    syntax: LineOfSyntax[];
+interface SourceViewProps {
+    source?: string;
+    syntax?: LineOfSyntax[];
     renderSyntaxTree?: RenderSyntaxTree;
 }
-
-export type SourceViewProps = TextViewProps & SyntaxViewProps;
 
 const renderGenericElement = (element: SyntaxElement, i: number): ReactNode => {
     if (typeof element === 'string') {

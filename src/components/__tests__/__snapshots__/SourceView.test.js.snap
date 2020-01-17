@@ -1,0 +1,167 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SourceView custom syntax renderer 1`] = `
+<DocumentFragment>
+  <table
+    class="source"
+  >
+    <tbody>
+      <tr
+        class="source-line"
+      >
+        <td
+          class="source-gutter"
+          data-line-number="1"
+        />
+        <td
+          class="source-code"
+        >
+          const a = 3;
+        </td>
+      </tr>
+      <tr
+        class="source-line"
+      >
+        <td
+          class="source-gutter"
+          data-line-number="2"
+        />
+        <td
+          class="source-code"
+        >
+          console.log(3);
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`SourceView syntax source 1`] = `
+<DocumentFragment>
+  <table
+    class="source"
+  >
+    <tbody>
+      <tr
+        class="source-line"
+      >
+        <td
+          class="source-gutter"
+          data-line-number="1"
+        />
+        <td
+          class="source-code"
+        >
+          <span
+            class="token keyword"
+          >
+            const
+          </span>
+           a 
+          <span
+            class="token operator"
+          >
+            =
+          </span>
+           
+          <span
+            class="token number"
+          >
+            3
+          </span>
+          <span
+            class="token punctuation"
+          >
+            ;
+          </span>
+        </td>
+      </tr>
+      <tr
+        class="source-line"
+      >
+        <td
+          class="source-gutter"
+          data-line-number="2"
+        />
+        <td
+          class="source-code"
+        >
+          <span
+            class="token console class-name"
+          >
+            console
+          </span>
+          <span
+            class="token punctuation"
+          >
+            .
+          </span>
+          <span
+            class="token method function property-access"
+          >
+            log
+          </span>
+          <span
+            class="token punctuation"
+          >
+            (
+          </span>
+          <span
+            class="token number"
+          >
+            3
+          </span>
+          <span
+            class="token punctuation"
+          >
+            )
+          </span>
+          <span
+            class="token punctuation"
+          >
+            ;
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`SourceView text source 1`] = `
+<DocumentFragment>
+  <table
+    class="source"
+  >
+    <tbody>
+      <tr
+        class="source-line"
+      >
+        <td
+          class="source-gutter"
+          data-line-number="1"
+        />
+        <td
+          class="source-code"
+        >
+          const a = 3;
+        </td>
+      </tr>
+      <tr
+        class="source-line"
+      >
+        <td
+          class="source-gutter"
+          data-line-number="2"
+        />
+        <td
+          class="source-code"
+        >
+          console.log(3);
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
