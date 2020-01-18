@@ -66,12 +66,12 @@ const Settings: FC<Props> = ({value, onChange}) => {
                 <DebouncedInput onChange={updateKeyword} />
             </Field>
             <Field>
-                <Checkbox value={markTab} onChange={updateMarkTab}>
+                <Checkbox checked={markTab} onChange={updateMarkTab}>
                     Mark Tab
                 </Checkbox>
             </Field>
             <Field>
-                <Checkbox value={markCarriageReturn} onChange={updateMarkCarriageReturn}>
+                <Checkbox checked={markCarriageReturn} onChange={updateMarkCarriageReturn}>
                     Mark Carraige Return
                 </Checkbox>
             </Field>
