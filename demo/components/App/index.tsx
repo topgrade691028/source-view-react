@@ -15,7 +15,7 @@ const App: FC = () => {
                 <DebouncedInput is="textarea" rows={12} placeholder="Source code" onChange={setSource} />
             </div>
             <Settings value={settings} onChange={setSettings} />
-            {source && <SourceView source={source} {...settings} />}
+            {source && <SourceView style={{marginTop: 20}} source={source} {...settings} />}
         </div>
     );
 };

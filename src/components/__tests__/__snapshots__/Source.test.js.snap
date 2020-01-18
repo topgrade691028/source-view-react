@@ -1,5 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Source custom class name and style 1`] = `
+<DocumentFragment>
+  <table
+    class="source custom"
+    style="width: 400px;"
+  >
+    <tbody>
+      <tr
+        class="source-line"
+      >
+        <td
+          class="source-gutter"
+          data-line-number="1"
+        />
+        <td
+          class="source-code"
+        />
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
 exports[`Source custom syntax renderer 1`] = `
 <DocumentFragment>
   <table

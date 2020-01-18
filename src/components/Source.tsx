@@ -1,4 +1,4 @@
-import {useMemo, FC, ReactNode} from 'react';
+import {useMemo, FC, ReactNode, CSSProperties} from 'react';
 import {LineOfSyntax, SyntaxElement, TreeNode} from 'source-tokenizer';
 
 export type RenderSyntaxTree = (root: TreeNode, defaultRender: RenderSyntaxElement, i: number) => ReactNode;
@@ -6,6 +6,8 @@ export type RenderSyntaxTree = (root: TreeNode, defaultRender: RenderSyntaxEleme
 export type RenderSyntaxElement = (element: SyntaxElement, i: number) => ReactNode;
 
 interface SourceProps {
+    className?: string;
+    style?: CSSProperties;
     source?: string;
     syntax?: LineOfSyntax[];
     renderSyntaxTree?: RenderSyntaxTree;
@@ -73,12 +75,12 @@ const reduceLineWith = (props: SourceProps) => {
 };
 
 export const Source: FC<SourceProps> = props => {
-    const {source, syntax} = props;
+    const {source, syntax, className, style} = props;
     const lines = useMemo(() => source?.split('\n') ?? [], [source]);
     const reduceLine = reduceLineWith(props);
 
     return (
-        <table className="source">
+        <table className={className ? `source ${className}` : 'source'} style={style}>
             <tbody>
                 {syntax ? syntax.reduce(reduceLine, []) : lines.reduce(reduceLine, [])}
             </tbody>

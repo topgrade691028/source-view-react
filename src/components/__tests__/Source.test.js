@@ -49,4 +49,9 @@ describe('Source', () => {
         const {asFragment} = render(<Source source={source} widgets={widgets} />);
         expect(asFragment()).toMatchSnapshot();
     });
+
+    test('custom class name and style', () => {
+        const {asFragment} = render(<Source source="" className="custom" style={{width: 400}} />);
+        expect(asFragment()).toMatchSnapshot();
+    });
 });

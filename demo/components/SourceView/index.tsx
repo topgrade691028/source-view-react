@@ -1,4 +1,4 @@
-import {useMemo, FC} from 'react';
+import {useMemo, FC, CSSProperties} from 'react';
 import {flatMap} from 'lodash';
 import {highlight} from 'refractor';
 import {tokenize, pickRanges, SourceRange} from 'source-tokenizer';
@@ -35,12 +35,13 @@ const findKeywordRangesInLine = (line: number, source: string, keyword: string, 
 };
 
 interface Props {
+    style: CSSProperties;
     source: string;
     keyword: string;
     language?: string;
 }
 
-const SourceView: FC<Props> = ({source, keyword, language}) => {
+const SourceView: FC<Props> = ({style, source, keyword, language}) => {
     const syntax = useMemo(
         () => {
             const lines = source.split('\n');
@@ -56,7 +57,7 @@ const SourceView: FC<Props> = ({source, keyword, language}) => {
         [language, source, keyword]
     );
 
-    return <Source source={source} syntax={syntax} renderSyntaxTree={renderTree} />;
+    return <Source style={style} source={source} syntax={syntax} renderSyntaxTree={renderTree} />;
 };
 
 export default SourceView;
