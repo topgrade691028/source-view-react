@@ -9,6 +9,7 @@ interface SourceProps {
     source?: string;
     syntax?: LineOfSyntax[];
     renderSyntaxTree?: RenderSyntaxTree;
+    widgets?: {[key: number]: ReactNode};
 }
 
 const renderGenericElement = (element: SyntaxElement, i: number): ReactNode => {
@@ -23,10 +24,6 @@ const renderGenericElement = (element: SyntaxElement, i: number): ReactNode => {
     );
 };
 
-const renderGutter = (line: number): ReactNode => <td className="source-gutter" data-line-number={line} />;
-
-const renderSourceContent = (source: string): ReactNode => <td className="source-code">{source}</td>;
-
 const renderSyntaxContent = (syntax: LineOfSyntax, {renderSyntaxTree}: SourceProps): ReactNode => {
     const render = (element: SyntaxElement, i: number) => {
         if (typeof element === 'string') {
@@ -40,35 +37,50 @@ const renderSyntaxContent = (syntax: LineOfSyntax, {renderSyntaxTree}: SourcePro
         return renderGenericElement(element, i);
     };
 
-    return <td className="source-code">{syntax.map(render)}</td>;
+    return syntax.map(render);
 };
 
-const renderSourceLine = (content: string, i: number): ReactNode => (
-    <tr key={i} className="source-line">
-        {renderGutter(i + 1)}
-        {renderSourceContent(content)}
-    </tr>
-);
+const reduceLineWith = (props: SourceProps) => {
+    const {widgets = {}} = props;
 
-const renderSyntaxLine = (content: LineOfSyntax, i: number, props: SourceProps): ReactNode => (
-    <tr key={i} className="source-line">
-        {renderGutter(i + 1)}
-        {renderSyntaxContent(content, props)}
-    </tr>
-);
+    return (children: ReactNode[], current: string | LineOfSyntax, i: number): ReactNode[] => {
+        const lineNumber = i + 1;
+
+        const lineElement = (
+            <tr key={`line-${lineNumber}`} className="source-line">
+                <td className="source-gutter" data-line-number={lineNumber} />
+                <td className="source-code">
+                    {typeof current === 'string' ? current : renderSyntaxContent(current, props)}
+                </td>
+            </tr>
+        );
+        children.push(lineElement);
+
+        const widget = widgets[lineNumber];
+        if (widget) {
+            const widgetContainerElement = (
+                <tr key={`widget-${lineNumber}`} className="source-widget">
+                    <td colSpan={2}>
+                        {widget}
+                    </td>
+                </tr>
+            );
+            children.push(widgetContainerElement);
+        }
+
+        return children;
+    };
+};
 
 export const Source: FC<SourceProps> = props => {
     const {source, syntax} = props;
     const lines = useMemo(() => source?.split('\n') ?? [], [source]);
+    const reduceLine = reduceLineWith(props);
 
     return (
         <table className="source">
             <tbody>
-                {
-                    syntax
-                        ? syntax.map((item, i) => renderSyntaxLine(item, i, props))
-                        : lines.map(renderSourceLine)
-                }
+                {syntax ? syntax.reduce(reduceLine, []) : lines.reduce(reduceLine, [])}
             </tbody>
         </table>
     );

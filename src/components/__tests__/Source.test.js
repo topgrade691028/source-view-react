@@ -41,4 +41,12 @@ describe('Source', () => {
         const {asFragment} = render(<Source syntax={syntax} renderSyntaxTree={stripSyntax} />);
         expect(asFragment()).toMatchSnapshot();
     });
+
+    test('with widgets', () => {
+        const widgets = {
+            2: <p>Hello World</p>,
+        };
+        const {asFragment} = render(<Source source={source} widgets={widgets} />);
+        expect(asFragment()).toMatchSnapshot();
+    });
 });

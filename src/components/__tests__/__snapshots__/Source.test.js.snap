@@ -165,3 +165,51 @@ exports[`Source text source 1`] = `
   </table>
 </DocumentFragment>
 `;
+
+exports[`Source with widgets 1`] = `
+<DocumentFragment>
+  <table
+    class="source"
+  >
+    <tbody>
+      <tr
+        class="source-line"
+      >
+        <td
+          class="source-gutter"
+          data-line-number="1"
+        />
+        <td
+          class="source-code"
+        >
+          const a = 3;
+        </td>
+      </tr>
+      <tr
+        class="source-line"
+      >
+        <td
+          class="source-gutter"
+          data-line-number="2"
+        />
+        <td
+          class="source-code"
+        >
+          console.log(3);
+        </td>
+      </tr>
+      <tr
+        class="source-widget"
+      >
+        <td
+          colspan="2"
+        >
+          <p>
+            Hello World
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
