@@ -1,4 +1,4 @@
-import {useMemo, FC, ReactNode, CSSProperties, SyntheticEvent} from 'react';
+import {useMemo, FC, ReactNode, CSSProperties, SyntheticEvent, HTMLAttributes} from 'react';
 import {LineOfSyntax, SyntaxElement} from 'source-tokenizer';
 import {RenderSyntaxTree, EventAttributes, RenderGutter} from '../interface';
 
@@ -16,7 +16,7 @@ interface SourceProps {
     selectedLines?: number[];
 }
 
-const mapEventsWith = (events?: EventAttributes) => (line: number): EventAttributes => {
+const mapEventsWith = (events?: EventAttributes) => (line: number): HTMLAttributes<HTMLTableCellElement> => {
     if (!events) {
         return {};
     }
@@ -24,10 +24,10 @@ const mapEventsWith = (events?: EventAttributes) => (line: number): EventAttribu
     const entries = Object.entries(events);
     return entries.reduce(
         (events, [name, fn]) => {
-            events[name] = (e: SyntheticEvent) => fn(line, e);
+            events[name] = (e: SyntheticEvent) => (fn && fn(line, e));
             return events;
         },
-        {} as EventAttributes
+        {} as HTMLAttributes<HTMLTableCellElement>
     );
 };
 
