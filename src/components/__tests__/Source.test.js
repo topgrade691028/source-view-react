@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-no-bind */
+import '@testing-library/jest-dom/extend-expect';
 import {render} from '@testing-library/react';
 import {highlight} from 'refractor';
 import {tokenize} from 'source-tokenizer';
@@ -44,14 +45,19 @@ describe('Source', () => {
 
     test('with widgets', () => {
         const widgets = {
-            2: <p>Hello World</p>,
+            2: <p>This is a widget</p>,
         };
-        const {asFragment} = render(<Source source={source} widgets={widgets} />);
-        expect(asFragment()).toMatchSnapshot();
+        const {getByText} = render(<Source source={source} widgets={widgets} />);
+        expect(getByText('This is a widget')).toBeTruthy();
     });
 
     test('custom class name and style', () => {
         const {asFragment} = render(<Source source="" className="custom" style={{width: 400}} />);
         expect(asFragment()).toMatchSnapshot();
+    });
+
+    test('custom start line number', () => {
+        const {container} = render(<Source source={source} lineStart={8} />);
+        expect(container.querySelector('.source-gutter')).toHaveAttribute('data-line-number', '8');
     });
 });

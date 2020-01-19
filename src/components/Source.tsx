@@ -11,6 +11,7 @@ interface SourceProps {
     source?: string;
     syntax?: LineOfSyntax[];
     renderSyntaxTree?: RenderSyntaxTree;
+    lineStart?: number;
     widgets?: {[key: number]: ReactNode};
 }
 
@@ -42,11 +43,11 @@ const renderSyntaxContent = (syntax: LineOfSyntax, {renderSyntaxTree}: SourcePro
     return syntax.map(render);
 };
 
-const reduceLineWith = (props: SourceProps) => {
-    const {widgets = {}} = props;
+const renderLineWith = (props: SourceProps) => {
+    const {lineStart = 1, widgets = {}} = props;
 
     return (children: ReactNode[], current: string | LineOfSyntax, i: number): ReactNode[] => {
-        const lineNumber = i + 1;
+        const lineNumber = i + lineStart;
 
         const lineElement = (
             <tr key={`line-${lineNumber}`} className="source-line">
@@ -77,12 +78,12 @@ const reduceLineWith = (props: SourceProps) => {
 export const Source: FC<SourceProps> = props => {
     const {source, syntax, className, style} = props;
     const lines = useMemo(() => source?.split('\n') ?? [], [source]);
-    const reduceLine = reduceLineWith(props);
+    const renderLine = renderLineWith(props);
 
     return (
         <table className={className ? `source ${className}` : 'source'} style={style}>
             <tbody>
-                {syntax ? syntax.reduce(reduceLine, []) : lines.reduce(reduceLine, [])}
+                {syntax ? syntax.reduce(renderLine, []) : lines.reduce(renderLine, [])}
             </tbody>
         </table>
     );
