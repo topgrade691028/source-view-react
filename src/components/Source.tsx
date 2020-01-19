@@ -1,9 +1,6 @@
-import {useMemo, FC, ReactNode, CSSProperties} from 'react';
-import {LineOfSyntax, SyntaxElement, TreeNode} from 'source-tokenizer';
-
-export type RenderSyntaxTree = (root: TreeNode, defaultRender: RenderSyntaxElement, i: number) => ReactNode;
-
-export type RenderSyntaxElement = (element: SyntaxElement, i: number) => ReactNode;
+import {useMemo, FC, ReactNode, CSSProperties, SyntheticEvent} from 'react';
+import {LineOfSyntax, SyntaxElement} from 'source-tokenizer';
+import {RenderSyntaxTree, EventAttributes} from '../interface';
 
 interface SourceProps {
     className?: string;
@@ -13,7 +10,24 @@ interface SourceProps {
     renderSyntaxTree?: RenderSyntaxTree;
     lineStart?: number;
     widgets?: {[key: number]: ReactNode};
+    gutterEvents?: EventAttributes;
+    codeEvents?: EventAttributes;
 }
+
+const mapEventsWith = (events?: EventAttributes) => (line: number): EventAttributes => {
+    if (!events) {
+        return {};
+    }
+
+    const entries = Object.entries(events);
+    return entries.reduce(
+        (events, [name, fn]) => {
+            events[name] = (e: SyntheticEvent) => fn(line, e);
+            return events;
+        },
+        {} as EventAttributes
+    );
+};
 
 const renderGenericElement = (element: SyntaxElement, i: number): ReactNode => {
     if (typeof element === 'string') {
@@ -44,15 +58,17 @@ const renderSyntaxContent = (syntax: LineOfSyntax, {renderSyntaxTree}: SourcePro
 };
 
 const renderLineWith = (props: SourceProps) => {
-    const {lineStart = 1, widgets = {}} = props;
+    const {lineStart = 1, widgets = {}, gutterEvents, codeEvents} = props;
+    const mapGutterEvents = mapEventsWith(gutterEvents);
+    const mapCodeEvents = mapEventsWith(codeEvents);
 
     return (children: ReactNode[], current: string | LineOfSyntax, i: number): ReactNode[] => {
         const lineNumber = i + lineStart;
 
         const lineElement = (
             <tr key={`line-${lineNumber}`} className="source-line">
-                <td className="source-gutter" data-line-number={lineNumber} />
-                <td className="source-code">
+                <td className="source-gutter" data-line-number={lineNumber} {...mapGutterEvents(lineNumber)} />
+                <td className="source-code" {...mapCodeEvents(lineNumber)}>
                     {typeof current === 'string' ? current : renderSyntaxContent(current, props)}
                 </td>
             </tr>
