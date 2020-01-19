@@ -5,6 +5,8 @@
     --source-selection-background-color: #b3d7ff;
     --source-gutter-background-color: #d6fedb;
     --source-code-background-color: #eaffee;
+    --source-gutter-selected-background-color: #fffce0;
+    --source-code-selected-background-color: #fffce0;
 }
 
 .source {
@@ -36,6 +38,14 @@
     text-align: right;
     cursor: pointer;
     user-select: none;
+}
+
+.source-line-selected > .source-gutter {
+    background-color: var(--source-gutter-selected-background-color);
+}
+
+.source-line-selected > .source-code {
+    background-color: var(--source-code-selected-background-color);
 }
 
 .source-gutter-default::before {
