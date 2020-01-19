@@ -84,4 +84,10 @@ describe('Source', () => {
         const {getByText} = render(<Source source={source} renderGutter={renderGutter} />);
         expect(getByText('Custom line 1')).toBeTruthy();
     });
+
+    test('selection', () => {
+        const selectedLines = [2];
+        const {container} = render(<Source source={source} selectedLines={selectedLines} />);
+        expect(container.querySelectorAll('.source-line-selected').length).toBe(1);
+    });
 });

@@ -13,6 +13,7 @@ interface SourceProps {
     widgets?: {[key: number]: ReactNode};
     gutterEvents?: EventAttributes;
     codeEvents?: EventAttributes;
+    selectedLines?: number[];
 }
 
 const mapEventsWith = (events?: EventAttributes) => (line: number): EventAttributes => {
@@ -59,15 +60,19 @@ const renderSyntaxContent = (syntax: LineOfSyntax, {renderSyntaxTree}: SourcePro
 };
 
 const renderLineWith = (props: SourceProps) => {
-    const {lineStart = 1, widgets = {}, gutterEvents, codeEvents, renderGutter} = props;
+    const {lineStart = 1, widgets = {}, gutterEvents, codeEvents, renderGutter, selectedLines = []} = props;
     const mapGutterEvents = mapEventsWith(gutterEvents);
     const mapCodeEvents = mapEventsWith(codeEvents);
+    const selection = new Set(selectedLines);
 
     return (children: ReactNode[], current: string | LineOfSyntax, i: number): ReactNode[] => {
         const lineNumber = i + lineStart;
 
         const lineElement = (
-            <tr key={`line-${lineNumber}`} className="source-line">
+            <tr
+                key={`line-${lineNumber}`}
+                className={selection.has(lineNumber) ? 'source-line source-line-selected' : 'source-line'}
+            >
                 <td
                     className={`source-gutter source-gutter-${renderGutter ? 'custom' : 'default'}`}
                     data-line-number={lineNumber}
