@@ -1,10 +1,11 @@
-import {useMemo, FC, CSSProperties} from 'react';
+import {useReducer, useMemo, FC, CSSProperties} from 'react';
+import {produce} from 'immer';
 import {flatMap} from 'lodash';
 import {highlight} from 'refractor';
 import {tokenize, pickRanges, SourceRange} from 'source-tokenizer';
 import 'prism-color-variables/variables.css';
 import 'prism-color-variables/themes/visual-studio.css';
-import {Source, RenderSyntaxTree} from '../../../src';
+import {Source, RenderSyntaxTree, EventAttributes} from '../../../src';
 import '../../../src/index.css';
 // @ts-ignore
 import c from './index.less';
@@ -34,6 +35,22 @@ const findKeywordRangesInLine = (line: number, source: string, keyword: string, 
     return [current, ...next];
 };
 
+const useSelection = () => useReducer(
+    (state: number[], line: number) => produce(
+        state,
+        state => {
+            const index = state.indexOf(line);
+            if (index >= 0) {
+                state.splice(index, 1);
+            }
+            else {
+                state.push(line);
+            }
+        }
+    ),
+    []
+);
+
 interface Props {
     style: CSSProperties;
     source: string;
@@ -56,8 +73,28 @@ const SourceView: FC<Props> = ({style, source, keyword, language}) => {
         },
         [language, source, keyword]
     );
+    const [selectedLines, toggleLineSelection] = useSelection();
+    const events: EventAttributes = useMemo(
+        () => {
+            return {
+                onClick(line) {
+                    toggleLineSelection(line);
+                },
+            };
+        },
+        [toggleLineSelection]
+    );
 
-    return <Source style={style} source={source} syntax={syntax} renderSyntaxTree={renderTree} />;
+    return (
+        <Source
+            style={style}
+            source={source}
+            syntax={syntax}
+            renderSyntaxTree={renderTree}
+            selectedLines={selectedLines}
+            gutterEvents={events}
+        />
+    );
 };
 
 export default SourceView;

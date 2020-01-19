@@ -37,6 +37,7 @@
     "classnames": "^2.2.6",
     "enzyme": "^3.11.0",
     "husky": "^4.0.10",
+    "immer": "^5.3.2",
     "lodash": "^4.17.15",
     "prism-color-variables": "^1.0.0",
     "react": "^16.12.0",
