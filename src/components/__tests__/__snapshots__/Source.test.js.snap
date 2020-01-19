@@ -11,7 +11,7 @@ exports[`Source custom class name and style 1`] = `
         class="source-line"
       >
         <td
-          class="source-gutter"
+          class="source-gutter source-gutter-default"
           data-line-number="1"
         />
         <td
@@ -33,7 +33,7 @@ exports[`Source custom syntax renderer 1`] = `
         class="source-line"
       >
         <td
-          class="source-gutter"
+          class="source-gutter source-gutter-default"
           data-line-number="1"
         />
         <td
@@ -46,7 +46,7 @@ exports[`Source custom syntax renderer 1`] = `
         class="source-line"
       >
         <td
-          class="source-gutter"
+          class="source-gutter source-gutter-default"
           data-line-number="2"
         />
         <td
@@ -70,7 +70,7 @@ exports[`Source syntax source 1`] = `
         class="source-line"
       >
         <td
-          class="source-gutter"
+          class="source-gutter source-gutter-default"
           data-line-number="1"
         />
         <td
@@ -104,7 +104,7 @@ exports[`Source syntax source 1`] = `
         class="source-line"
       >
         <td
-          class="source-gutter"
+          class="source-gutter source-gutter-default"
           data-line-number="2"
         />
         <td
@@ -162,7 +162,7 @@ exports[`Source text source 1`] = `
         class="source-line"
       >
         <td
-          class="source-gutter"
+          class="source-gutter source-gutter-default"
           data-line-number="1"
         />
         <td
@@ -175,7 +175,7 @@ exports[`Source text source 1`] = `
         class="source-line"
       >
         <td
-          class="source-gutter"
+          class="source-gutter source-gutter-default"
           data-line-number="2"
         />
         <td

@@ -1,6 +1,6 @@
 import {useMemo, FC, ReactNode, CSSProperties, SyntheticEvent} from 'react';
 import {LineOfSyntax, SyntaxElement} from 'source-tokenizer';
-import {RenderSyntaxTree, EventAttributes} from '../interface';
+import {RenderSyntaxTree, EventAttributes, RenderGutter} from '../interface';
 
 interface SourceProps {
     className?: string;
@@ -8,6 +8,7 @@ interface SourceProps {
     source?: string;
     syntax?: LineOfSyntax[];
     renderSyntaxTree?: RenderSyntaxTree;
+    renderGutter?: RenderGutter;
     lineStart?: number;
     widgets?: {[key: number]: ReactNode};
     gutterEvents?: EventAttributes;
@@ -58,7 +59,7 @@ const renderSyntaxContent = (syntax: LineOfSyntax, {renderSyntaxTree}: SourcePro
 };
 
 const renderLineWith = (props: SourceProps) => {
-    const {lineStart = 1, widgets = {}, gutterEvents, codeEvents} = props;
+    const {lineStart = 1, widgets = {}, gutterEvents, codeEvents, renderGutter} = props;
     const mapGutterEvents = mapEventsWith(gutterEvents);
     const mapCodeEvents = mapEventsWith(codeEvents);
 
@@ -67,7 +68,13 @@ const renderLineWith = (props: SourceProps) => {
 
         const lineElement = (
             <tr key={`line-${lineNumber}`} className="source-line">
-                <td className="source-gutter" data-line-number={lineNumber} {...mapGutterEvents(lineNumber)} />
+                <td
+                    className={`source-gutter source-gutter-${renderGutter ? 'custom' : 'default'}`}
+                    data-line-number={lineNumber}
+                    {...mapGutterEvents(lineNumber)}
+                >
+                    {renderGutter && renderGutter(lineNumber)}
+                </td>
                 <td className="source-code" {...mapCodeEvents(lineNumber)}>
                     {typeof current === 'string' ? current : renderSyntaxContent(current, props)}
                 </td>

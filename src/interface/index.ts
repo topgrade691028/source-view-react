@@ -7,3 +7,5 @@ export type RenderSyntaxTree = (root: TreeNode, defaultRender: RenderSyntaxEleme
 export type RenderSyntaxElement = (element: SyntaxElement, i: number) => ReactNode;
 
 export type EventAttributes = Omit<DOMAttributes<HTMLTableCellElement>, 'children' | 'dangerouslySetInnerHTML'>;
+
+export type RenderGutter = (line: number) => ReactNode;

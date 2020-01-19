@@ -38,7 +38,7 @@
     user-select: none;
 }
 
-.source-gutter::before {
+.source-gutter-default::before {
     content: attr(data-line-number);
 }
 

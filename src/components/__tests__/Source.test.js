@@ -78,4 +78,10 @@ describe('Source', () => {
         expect(click.mock.calls[0][0]).toBe(1);
         expect(click.mock.calls[0][1]).toBeTruthy();
     });
+
+    test('custom gutter renderer', () => {
+        const renderGutter = line => <span>Custom line {line}</span>;
+        const {getByText} = render(<Source source={source} renderGutter={renderGutter} />);
+        expect(getByText('Custom line 1')).toBeTruthy();
+    });
 });
