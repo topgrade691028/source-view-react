@@ -1,5 +1,4 @@
-import {useReducer, useMemo, FC, CSSProperties} from 'react';
-import {produce} from 'immer';
+import {useMemo, FC, CSSProperties, MouseEvent} from 'react';
 import {flatMap} from 'lodash';
 import {highlight} from 'refractor';
 import {tokenize, pickRanges, SourceRange} from 'source-tokenizer';
@@ -7,6 +6,7 @@ import 'prism-color-variables/variables.css';
 import 'prism-color-variables/themes/visual-studio.css';
 import {Source, RenderSyntaxTree, EventAttributes} from '../../../src';
 import '../../../src/index.css';
+import useSelection from './selection';
 // @ts-ignore
 import c from './index.less';
 
@@ -35,22 +35,6 @@ const findKeywordRangesInLine = (line: number, source: string, keyword: string, 
     return [current, ...next];
 };
 
-const useSelection = () => useReducer(
-    (state: number[], line: number) => produce(
-        state,
-        state => {
-            const index = state.indexOf(line);
-            if (index >= 0) {
-                state.splice(index, 1);
-            }
-            else {
-                state.push(line);
-            }
-        }
-    ),
-    []
-);
-
 interface Props {
     style: CSSProperties;
     source: string;
@@ -73,20 +57,22 @@ const SourceView: FC<Props> = ({style, source, keyword, language}) => {
         },
         [language, source, keyword]
     );
-    const [selectedLines, toggleLineSelection] = useSelection();
+    const [selection, {selectIndex}] = useSelection();
+    const selectedLines = useMemo(() => selection.map(i => i + 1), [selection]);
     const events: EventAttributes = useMemo(
         () => {
             return {
-                onClick(line) {
-                    toggleLineSelection(line);
+                onClick(line, e) {
+                    selectIndex(line - 1, e as MouseEvent);
                 },
             };
         },
-        [toggleLineSelection]
+        [selectIndex]
     );
 
     return (
         <Source
+            key={source}
             style={style}
             source={source}
             syntax={syntax}
